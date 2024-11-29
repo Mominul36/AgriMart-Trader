@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "512584630711",
+    "firebase_url": "https://agri-mentor-98c8f-default-rtdb.firebaseio.com",
+    "project_id": "agri-mentor-98c8f",
+    "storage_bucket": "agri-mentor-98c8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512584630711:android:d32a5abac3e48dba3e2832",
+        "android_client_info": {
+          "package_name": "com.example.agrimart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_pyP9bHts9K7tbRdT-ZqXM7r5Ivlwvrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512584630711:android:52870e23e85ee0313e2832",
+        "android_client_info": {
+          "package_name": "com.example.agrimarttrader"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_pyP9bHts9K7tbRdT-ZqXM7r5Ivlwvrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512584630711:android:40d37215393a23ef3e2832",
+        "android_client_info": {
+          "package_name": "com.example.agrimentor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_pyP9bHts9K7tbRdT-ZqXM7r5Ivlwvrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

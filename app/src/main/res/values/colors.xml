@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="base_color">#43D3BA</color>
+    <color name="green">#088454</color>
+    <color name="edittextcolor">#707070</color>
+    <color name="edittextbackgroundcolor"> #D7D6D7</color>
+    <color name="variant_color">#2e8a4d</color>
+    <color name="other_color">#38a45c</color>
+    <color name="colorprimarydark">#43D3BA</color>
+    <color name="changebuttonbackgroundcolor">#CED5D0</color>
+
+
+<!--    43D3BA-->
+<!--    5cc387-->
+</resources>
