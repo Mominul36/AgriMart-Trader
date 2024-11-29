@@ -1,60 +1,112 @@
 package com.example.agrimarttrader.Fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.agrimarttrader.Adapters.FertilizerAdapter
+import com.example.agrimarttrader.Adapters.PesticideAdapter
+import com.example.agrimarttrader.AddFertilizerActivity
+import com.example.agrimarttrader.AddPesticideActivity
+import com.example.agrimarttrader.Class.MyClass
+import com.example.agrimarttrader.Model.Fertilizer
+import com.example.agrimarttrader.Model.Pesticide
 import com.example.agrimarttrader.R
+import com.example.agrimarttrader.databinding.FragmentFertilizerBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PesticideFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PesticideFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentFertilizerBinding
+    lateinit var pesticideList : MutableList<Pesticide>
+    lateinit var adapter: PesticideAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pesticide, container, false)
+        binding = FragmentFertilizerBinding.inflate(inflater, container, false)
+
+        pesticideList = mutableListOf()
+        adapter = PesticideAdapter(requireContext(),pesticideList)
+        binding.recyclerViewFertilizers.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewFertilizers.adapter = adapter
+
+        binding.recyclerViewFertilizers.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
+
+
+        fetchFertilizer()
+
+
+        binding.fabAddFertilizer.setOnClickListener {
+
+            startActivity(Intent(requireContext(), AddPesticideActivity::class.java))
+
+
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PesticideFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PesticideFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun fetchFertilizer() {
+
+        binding.recyclerViewFertilizers.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
+        MyClass().getCurrentTrader { trader->
+            if(trader!=null){
+                var traderId = trader.id.toString()
+
+
+                var database = FirebaseDatabase.getInstance().getReference("Pesticide")
+
+                database.orderByChild("traderId").equalTo(traderId).addValueEventListener(object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.exists()){
+                            pesticideList.clear()
+                            for(childSnapshot in snapshot.children){
+                                var pesticide = childSnapshot.getValue(Pesticide::class.java)
+                                if(pesticide!=null){
+                                    pesticideList.add(pesticide)
+                                }
+
+                            }
+
+
+
+                            binding.recyclerViewFertilizers.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.GONE
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
+
+
+
+
+
+
+
             }
+
+        }
+
+
+
+
     }
 }

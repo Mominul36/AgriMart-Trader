@@ -39,6 +39,12 @@ class FertilizerFragment : Fragment() {
         binding.recyclerViewFertilizers.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewFertilizers.adapter = adapter
 
+        binding.recyclerViewFertilizers.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
+
+
+
         fetchFertilizer()
 
 
@@ -53,6 +59,9 @@ class FertilizerFragment : Fragment() {
     }
 
     private fun fetchFertilizer() {
+
+        binding.recyclerViewFertilizers.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
 
         MyClass().getCurrentTrader { trader->
             if(trader!=null){
@@ -75,6 +84,10 @@ class FertilizerFragment : Fragment() {
 
                             }
 
+
+
+                            binding.recyclerViewFertilizers.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.GONE
                            adapter.notifyDataSetChanged()
                         }
                     }

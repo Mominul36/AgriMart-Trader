@@ -12,12 +12,14 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.agrimarttrader.Class.ControlImage
 import com.example.agrimarttrader.Class.MyClass
 import com.example.agrimarttrader.Model.Fertilizer
+import com.example.agrimarttrader.Model.Pesticide
 import com.example.agrimarttrader.databinding.ActivityAddFertilizerBinding
+import com.example.agrimarttrader.databinding.ActivityAddPesticideBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class AddFertilizerActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddFertilizerBinding
+class AddPesticideActivity : AppCompatActivity() {
+    lateinit var binding: ActivityAddPesticideBinding
     private lateinit var controlImage: ControlImage
     lateinit var database: DatabaseReference
     var selectedUnit: String = ""
@@ -25,7 +27,7 @@ class AddFertilizerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityAddFertilizerBinding.inflate(layoutInflater)
+        binding = ActivityAddPesticideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.back.setOnClickListener{
@@ -33,7 +35,7 @@ class AddFertilizerActivity : AppCompatActivity() {
         }
 
         controlImage = ControlImage(this, activityResultRegistry, "imagePickerKey")
-        database = FirebaseDatabase.getInstance().getReference("Fertilizer")
+        database = FirebaseDatabase.getInstance().getReference("Pesticide")
 
         binding.progressBar.visibility = View.GONE
         binding.mainlayout.visibility = View.VISIBLE
@@ -47,7 +49,7 @@ class AddFertilizerActivity : AppCompatActivity() {
             addDataToDatabase()
         }
 
-        val units = listOf("Packet", "Kg", "Sack")
+        val units = listOf("Packet", "Kg", "Bottle","Ml")
         val unitAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, units)
         unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.unit.adapter = unitAdapter
@@ -84,10 +86,10 @@ class AddFertilizerActivity : AppCompatActivity() {
                         val district = trader.district
                         val thana = trader.thana
 
-                        val fertilizer = Fertilizer(id, traderId, name, rate, unit, description, division, district, thana, pic, rating)
-                        database.child(id).setValue(fertilizer)
+                        val pesticide = Pesticide(id, traderId, name, rate, unit, description, division, district, thana, pic, rating)
+                        database.child(id).setValue(pesticide)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Fertilizer Added Successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Pesticide Added Successfully", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
                             .addOnFailureListener {
@@ -98,7 +100,6 @@ class AddFertilizerActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                // Hide the ProgressBar if image upload fails
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }

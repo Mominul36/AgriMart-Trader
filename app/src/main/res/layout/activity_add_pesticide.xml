@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Fertilizer"
+                android:text="Add Pesticide"
                 android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold"
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fertilizer Name"
+                    android:text="Pesticide Name"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -182,7 +182,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fertilizer Photo"
+                    android:text="Pesticide Photo"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold" />
